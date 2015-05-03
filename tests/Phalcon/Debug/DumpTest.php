@@ -13,39 +13,39 @@ class DumpTest extends \PHPUnit_Framework_TestCase
     public function testDumpingHtmlStringVarByDefaultShouldEchoNonEscapedDump()
     {
         ob_start();
-        $dump = new \Phalcon\Debug\Dump($this->flushBuffer);
+        $dump = new \Phalcon\Debug\DumpExtended($this->flushBuffer);
         $dump->dump($this->fixtures['htmlString']);
         $output = ob_get_clean();
         $this->assertBacktraceExists($output);
         // assert string was not converted
         $this->assertContains($this->fixtures['htmlString'], $output);
         // assert correct sapi set
-        $this->assertEquals(PHP_SAPI, \Phalcon\Debug\Dump::getSapi());
+        $this->assertEquals(PHP_SAPI, \Phalcon\Debug\DumpExtended::getSapi());
     }
 
     public function testDumpingHtmlStringVarWithNonCliSapiShouldEchoEscapedDump()
     {
         // non cli sapi
-        \Phalcon\Debug\Dump::setSapi('apache');
+        \Phalcon\Debug\DumpExtended::setSapi('apache');
 
         ob_start();
-        $dump = new \Phalcon\Debug\Dump($this->flushBuffer);
+        $dump = new \Phalcon\Debug\DumpExtended($this->flushBuffer);
         $dump->dump($this->fixtures['htmlString']);
         $output = ob_get_clean();
         $this->assertBacktraceExists($output);
         // assert string was converted
         $this->assertContains(htmlentities($this->fixtures['htmlString'], ENT_QUOTES, 'UTF-8'), $output);
         // assert correct sapi set
-        $this->assertEquals('apache', \Phalcon\Debug\Dump::getSapi());
+        $this->assertEquals('apache', \Phalcon\Debug\DumpExtended::getSapi());
     }
 
     public function testDumpingHtmlStringVarWithSupressedOutputShouldReturnValue()
     {
         // supress output
-        \Phalcon\Debug\Dump::setOutput(false);
+        \Phalcon\Debug\DumpExtended::setOutput(false);
 
         ob_start();
-        $dump = new \Phalcon\Debug\Dump($this->flushBuffer);
+        $dump = new \Phalcon\Debug\DumpExtended($this->flushBuffer);
         $return = $dump->dump($this->fixtures['htmlString']);
         $output = ob_get_clean();
         $this->assertBacktraceNotExists($output);
@@ -56,13 +56,13 @@ class DumpTest extends \PHPUnit_Framework_TestCase
         // assert dump was returned
         $this->assertContains($this->fixtures['htmlString'], $return);
         // assert right output flag was set
-        $this->assertFalse(\Phalcon\Debug\Dump::getOutput());
+        $this->assertFalse(\Phalcon\Debug\DumpExtended::getOutput());
     }
 
     public function testSecondDumpParamShouldOverrideGlobalOutputSetting()
     {
         ob_start();
-        $dump = new \Phalcon\Debug\Dump($this->flushBuffer);
+        $dump = new \Phalcon\Debug\DumpExtended($this->flushBuffer);
         $return = $dump->dump($this->fixtures['htmlString'], false);
         $output = ob_get_clean();
         // no backtrace
@@ -75,7 +75,7 @@ class DumpTest extends \PHPUnit_Framework_TestCase
 
     public function testIfNoXdebugVarDumpObjectShouldFallback()
     {
-        /* @var $mockDumpStub \Phalcon\Debug\Dump */
+        /* @var $mockDumpStub \Phalcon\Debug\DumpExtended */
         $mockDumpStub = $this->getMock('\Phalcon\Debug\Dump', array('xdebugDumpExists'),
             array($this->flushBuffer));
 
@@ -95,7 +95,7 @@ class DumpTest extends \PHPUnit_Framework_TestCase
     public function testObGetCleanShouldReturnEmptyIfFlushBufferNotSet()
     {
         ob_start();
-        $dump = new \Phalcon\Debug\Dump();
+        $dump = new \Phalcon\Debug\DumpExtended();
         $return = $dump->dump($this->fixtures['htmlString']);
         $output = ob_get_clean();
 
@@ -124,9 +124,9 @@ class DumpTest extends \PHPUnit_Framework_TestCase
     {
         parent::tearDown();
         // reset output flag to default
-        \Phalcon\Debug\Dump::setOutput(true);
+        \Phalcon\Debug\DumpExtended::setOutput(true);
         // reset PHP_SAPI
-        \Phalcon\Debug\Dump::setSapi(PHP_SAPI);
+        \Phalcon\Debug\DumpExtended::setSapi(PHP_SAPI);
 
     }
 }

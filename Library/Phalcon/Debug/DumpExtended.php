@@ -4,7 +4,7 @@ namespace Phalcon\Debug;
 /**
  * Concrete class for generating debug dumps related to the output source.
  */
-class Dump
+class DumpExtended
 {
 
     /**
