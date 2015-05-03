@@ -76,7 +76,7 @@ class DumpTest extends \PHPUnit_Framework_TestCase
     public function testIfNoXdebugVarDumpObjectShouldFallback()
     {
         /* @var $mockDumpStub \Phalcon\Debug\DumpExtended */
-        $mockDumpStub = $this->getMock('\Phalcon\Debug\Dump', array('xdebugDumpExists'),
+        $mockDumpStub = $this->getMock('\Phalcon\Debug\DumpExtended', array('xdebugDumpExists'),
             array($this->flushBuffer));
 
         $mockDumpStub->expects($this->once())
