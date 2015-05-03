@@ -2,6 +2,7 @@
 namespace Phalcon\Mvc\Model\Validator;
 
 use Phalcon\Mvc\Model\Exception;
+use Phalcon\Mvc\Model\ValidatorInterface;
 use Phalcon\Mvc\ModelInterface;
 use Phalcon\Mvc\CollectionInterface;
 
@@ -32,7 +33,7 @@ use Phalcon\Mvc\CollectionInterface;
  *}
  *</code>
  */
-class CardNumber extends \Phalcon\Mvc\Model\Validator
+class CardNumber extends \Phalcon\Mvc\Model\Validator implements ValidatorInterface
 {
     const AMERICAN_EXPRESS  = 0; // 34, 37
     const MASTERCARD        = 1; // 51-55

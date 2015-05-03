@@ -1,13 +1,15 @@
 <?php
 namespace Phalcon\Mvc\Model\Validator;
 
+use Phalcon\Mvc\Model\ValidatorInterface;
+
 /**
  * Phalcon\Mvc\Model\Validator\ConfirmationOf
  * Allows to validate if a field has a confirmation field with the same value
  * Don't forget to add confirmation field to be skipped on create and update
 
  */
-class ConfirmationOf extends \Phalcon\Mvc\Model\Validator
+class ConfirmationOf extends \Phalcon\Mvc\Model\Validator implements ValidatorInterface
 {
 
     /**
