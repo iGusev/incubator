@@ -44,7 +44,7 @@ class Between extends ModelValidator implements ValidatorInterface
      * @return boolean
      * @throws Exception
      */
-    public function validate($record)
+    public function validate(\Phalcon\Mvc\ModelInterface $record)
     {
         if (false === is_object($record) || false === $record instanceof ModelInterface) {
             throw new Exception('Invalid parameter type.');

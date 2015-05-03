@@ -38,7 +38,7 @@ class CardNumber extends \Phalcon\Mvc\Model\Validator
     const MASTERCARD        = 1; // 51-55
     const VISA              = 2; // 4
 
-    public function validate($record)
+    public function validate(\Phalcon\Mvc\ModelInterface $record)
     {
         if (false === $record instanceof ModelInterface && false === $record instanceof CollectionInterface) {
             throw new Exception('Invalid parameter type.');

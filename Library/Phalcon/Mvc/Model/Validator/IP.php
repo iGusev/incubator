@@ -55,7 +55,7 @@ class IP extends \Phalcon\Mvc\Model\Validator
     const VERSION_4  = FILTER_FLAG_IPV4;
     const VERSION_6  = FILTER_FLAG_IPV6;
 
-    public function validate($record)
+    public function validate(\Phalcon\Mvc\ModelInterface $record)
     {
         if (false === is_object($record)) {
             throw new Exception('Invalid parameter type.');
