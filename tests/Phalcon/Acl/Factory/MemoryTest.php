@@ -44,7 +44,9 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryShouldThrowExceptionIfActionsKeyIsMissing()
     {
         $config = new \Phalcon\Config\Adapter\Ini(__DIR__ . '/_fixtures/acl.ini');
-        unset($config->acl->resource->index->actions);
+        for($i = 0; $i < 4; $i++) {
+            unset($config->acl->resource->index->actions[$i]);
+        }
         unset($config->acl->role->guest->allow->index->actions[0]);
         $factory = new \Phalcon\Acl\Factory\Memory();
         $acl = $factory->create($config->get('acl'));
