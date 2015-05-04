@@ -10,6 +10,7 @@ class BetweenTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         \PHPUnit_Framework_Error_Warning::$enabled = TRUE;
+        \PHPUnit_Framework_Error_Notice::$enabled = TRUE;
     }
 
     public function dataBetween()
@@ -74,6 +75,7 @@ class BetweenTest extends \PHPUnit_Framework_TestCase
     public function testExceptionNotObject()
     {
         \PHPUnit_Framework_Error_Warning::$enabled = FALSE;
+        \PHPUnit_Framework_Error_Notice::$enabled = FALSE;
         $obj = new Between(array('min' => 1, 'max' => 2, 'field' => 'position'));
 
         $obj->validate(1);
@@ -94,6 +96,7 @@ class BetweenTest extends \PHPUnit_Framework_TestCase
     public function testValidateOtherInstance()
     {
         \PHPUnit_Framework_Error_Warning::$enabled = FALSE;
+        \PHPUnit_Framework_Error_Notice::$enabled = FALSE;
         require_once(__DIR__ . '/resources/TestBetweenFail.php');
 
         $obj = new \TestBetweenFail();
