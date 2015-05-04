@@ -121,14 +121,15 @@ class Memory
      */
     protected function addAccessRulesToRole($role, \Phalcon\Config $rules)
     {
-        foreach ($rules as $method => $rules) {
+        foreach ($rules as $method => $rules_inner) {
             // skip not wanted rules
             if (in_array($method, array('inherit', 'description'))) {
                 continue;
             }
 
-            foreach ($rules as $controller => $actionRules) {
+            foreach ($rules_inner as $controller => $actionRules) {
                 $actions = (array) $actionRules->get('actions');
+                var_dump($actions);
                 if (!$actions) {
                     throw new \Phalcon\Acl\Exception(
                         'Key "actions" must exist and must be traversable.'
